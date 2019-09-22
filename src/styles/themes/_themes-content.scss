@@ -1,0 +1,17 @@
+// App themes
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+
+@mixin themes-content {
+  // Base
+
+  input {
+    border: 1px solid $color_border;
+  }
+
+  // stylelint-disable-next-line selector-list-comma-newline-after, no-descending-specificity
+  h1, h2, h3, h4, h5, h6 {
+    color: $color_text;
+  }
+}
