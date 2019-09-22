@@ -1,0 +1,418 @@
+// Custom styles
+//////////////////////////////////////////////////////
+
+$footer_height: 60px;
+$footer_height_gadget: 45px;
+
+$breackpoint_height_min: 550px;
+$breackpoint_height_medium: 700px;
+$breackpoint_height_large: 850px;
+
+// Main layout
+
+.layout {
+  &__content {
+    box-sizing: border-box;
+    min-height: 100%;
+  }
+
+  &__footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    text-align: center;
+    @include size(100%, $footer-height);
+  }
+}
+
+.footer {
+  height: $footer_height;
+  background: $color_background;
+
+  address {
+    padding-top: 5px;
+  }
+
+  &__links {
+    > li {
+      display: inline-block;
+
+      &:not(:last-child) {
+        margin-right: $gutter * 5;
+
+        @include xs {
+          margin-right: $gutter * 1.5;
+        }
+
+        @include min {
+          margin-right: $gutter * 1.25;
+        }
+      }
+
+      a {
+        @include link-style($color_white, $color_white);
+        @include text($font-family_sans, $font-size_normal, $font-weight_sans_light);
+
+        @include sm {
+          @include text($font-family_sans, $font-size_small, $font-weight_sans_bold);
+        }
+
+        @include xs {
+          @include text($font-family_serif, $font-size_small, $font-weight_serif_bold);
+        }
+
+        @include min {
+          @include text($font-family_serif, $font-size_xsmall, $font-weight_serif_bold);
+        }
+      }
+    }
+  }
+
+  &__copyright {
+    color: $color_main_light;
+
+    @include xs {
+      @include text($font-family_sans, $font-size_small, $font-weight_sans_light);
+    }
+  }
+
+  @include sm-and-xs {
+    height: $footer_height_gadget;
+  }
+}
+
+// Screens
+
+.background {
+  position: fixed;
+  left: 0;
+  right: 0;
+  @include size(100%, calc(100vh - 60px));
+}
+
+.background-0 {
+  background: url("#{$image-path}background.jpg") 50% 50% no-repeat;
+  background-size: cover;
+  top: 0;
+  z-index: 0;
+}
+
+.background-1 {
+  background: url("#{$image-path}background.jpg") 50% 50% no-repeat;
+  background-size: cover;
+  top: 10px;
+  z-index: 1;
+}
+
+.scene-1,
+.scene-1-gadgets {
+  h2 {
+    white-space: nowrap;
+    width: 100%;
+    color: $color_white;
+    text-shadow: $text-shadow_coords-x $text-shadow_coords-y $text-shadow_size $color_text_shadow;
+    text-transform: uppercase;
+    padding-top: 6%;
+    @include text($font-family_serif, $font-size_large, $font-weight_serif_bold);
+
+    @include md {
+      padding-top: 8%;
+    }
+
+    strong {
+      color: $color_active;
+    }
+  }
+}
+
+.scene-1 {
+  z-index: 10;
+  overflow: hidden;
+  text-align: center;
+
+  h2 {
+    @include text($font-family_serif, $font-size_large, $font-weight_serif_bold);
+
+    @media (max-height: $breackpoint_height_min) {
+      padding-top: 3%;
+    }
+  }
+
+  &__1 {
+    // stylelint-disable-next-line declaration-no-important
+    top: 10px !important; // important to rewrite parallax.js inline style!!!
+    height: calc(100vh - 60px);
+    background: url("#{$image-path}kafedra.png") 50% 50% no-repeat;
+    background-size: cover;
+  }
+
+  &__2 {
+    @include size(100%, calc(100vh - 60px));
+  }
+
+  &__3 {
+    @include size(100%, calc(100vh - 60px));
+
+    .boom {
+      width: 100%;
+      position: absolute;
+      bottom: 40px;
+      left: 0;
+      right: 0;
+
+      > div {
+        position: relative;
+        margin: 0 auto;
+        background: url("#{$image-path}boom.svg") 50% 50% no-repeat;
+        background-size: contain;
+        @include size(300px, 200px);
+
+        > span {
+          position: absolute;
+          top: 70px;
+          left: 70px;
+          display: inline-block;
+          color: $color_white;
+          transform: rotate(-12deg);
+          @include text($font-family_serif, $font-size_large, $font-weight_serif_bold);
+        }
+      }
+
+      @media (max-height: $breackpoint_height_medium) {
+        bottom: 20px;
+      }
+
+      @media (max-height: $breackpoint_height_min) {
+        display: none;
+      }
+    }
+
+    .arrow {
+      width: 100%;
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      text-shadow: $text-shadow_coords-x $text-shadow_coords-y ($text-shadow_size * 2) $color_text_shadow;
+
+      // stylelint-disable-next-line no-descending-specificity
+      > span {
+        display: inline-block;
+        font-size: 70px;
+        @include link-style($color_white, $color_white);
+
+        @include md {
+          font-size: 70px;
+        }
+      }
+    }
+  }
+}
+
+.scene-1-gadgets {
+  height: 100vw;
+  background: url("#{$image-path}kafedra-tablet.jpg") 50% 50% no-repeat;
+  background-size: cover;
+
+  @include xs {
+    background: url("#{$image-path}kafedra-mobile.jpg") 50% 50% no-repeat;
+    background-size: cover;
+  }
+
+  h2 {
+    text-align: center;
+    padding-top: 10%;
+    @include text($font-family_serif, $font-size_normal, $font-weight_serif_bold);
+
+    @include xs {
+      @include text($font-family_serif, $font-size_small, $font-weight_serif_bold);
+    }
+
+    @include min {
+      @include text($font-family_serif, $font-size_xsmall, $font-weight_serif_bold);
+    }
+  }
+}
+
+.scene-2 {
+  z-index: 10;
+  position: relative;
+  background: $color_main;
+  transform-style: preserve-3d;
+
+  @include lg-and-md {
+    height: 100vh;
+  }
+
+  @include sm-and-xs {
+    min-height: calc(100vh - 100vw - 45px);
+  }
+
+  @media (max-height: $breackpoint_height_min) {
+    @include lg-and-md {
+      height: auto;
+      padding-bottom: $footer_height + ($gutter * 4);
+    }
+  }
+}
+
+// Widgets
+
+#radio {
+  position: absolute;
+  bottom: $footer_height;
+  background: url("#{$image-path}radio.png") 50% 100% no-repeat;
+  background-size: contain;
+  transform-origin: 0 100%;
+  transform: rotateX(-90deg);
+  @include size(100%, 60vh);
+
+  @media (max-height: $breackpoint_height_min) {
+    @include lg-and-md {
+      display: none;
+    }
+  }
+
+  @include sm {
+    @include size(90%, 40vh);
+  }
+
+  @include sm-and-xs {
+    position: static;
+    margin: ($gutter * 2) auto $footer_height_gadget;
+    transform: rotateX(0);
+  }
+
+  @include xs {
+    @include size(90%, 30vh);
+  }
+}
+
+.player {
+  position: relative;
+  width: 80vw;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: $gutter * 4;
+
+  @media (min-height: $breackpoint_height_large) {
+    padding-top: $gutter * 5;
+  }
+
+  @media (max-height: $breackpoint_height_min) {
+    padding-top: $gutter * 3;
+  }
+
+  @include not-xs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    &__now {
+      grid-column: 1 / 2;
+      grid-row: 1;
+    }
+
+    &__next {
+      grid-column: 2 / 3;
+      grid-row: 1;
+    }
+  }
+
+  @include md {
+    width: 90vw;
+  }
+
+  @include sm-and-xs {
+    width: 100%;
+  }
+
+  @include xs {
+    &__next {
+      margin-top: $gutter * 2;
+    }
+  }
+
+  &__btns {
+    padding-top: $gutter;
+    grid-column: 1 / 3;
+    grid-row: 2;
+
+    @include sm-and-xs {
+      padding-top: $gutter * 2;
+    }
+  }
+
+  &__label {
+    color: $color_main_light;
+    text-transform: uppercase;
+    @include text($font-family_serif, $font-size_normal, $font-weight_serif_bold);
+  }
+
+  &__track-title {
+    color: $color_white;
+    white-space: nowrap;
+    @include text($font-family_sans, $font-size_large, $font-weight_sans_bold);
+
+    .player__next & {
+      opacity: 0.5;
+    }
+
+    @include md-and-sm {
+      @include text($font-family_sans, round($font-size_normal * 0.85), $font-weight_sans_bold);
+    }
+
+    @include xs {
+      @include text($font-family_sans, round($font-size_normal * 0.7), $font-weight_sans_bold);
+    }
+  }
+
+  &__duration {
+    color: $color_main_light;
+    @include text($font-family_sans, $font-size_normal, $font-weight_sans_light);
+  }
+}
+
+.btn {
+  width: 200px;
+  display: inline-block;
+  vertical-align: top;
+  text-transform: uppercase;
+  @include text($font-family_serif, $font-size_normal, $font-weight_serif_bold);
+
+  & + .btn {
+    @include not-xs {
+      margin-left: $gutter * 2;
+    }
+    @include xs {
+      margin-top: $gutter;
+    }
+  }
+
+  @include xs {
+    display: block;
+    margin: 0 auto;
+  }
+
+  &--play {
+    @include btn($color_main, $color_white);
+
+    .player--active & {
+      display: none;
+    }
+  }
+
+  &--pause {
+    @include btn-transparent($color_white);
+    display: none;
+
+    .player--active & {
+      display: inline-block;
+    }
+  }
+
+  &--next {
+    @include btn($color_main, $color_active);
+  }
+}

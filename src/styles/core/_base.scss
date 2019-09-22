@@ -1,20 +1,17 @@
-// Main Elements (easy normalize)
+// Main Elements
 //////////////////////////////////////////////////////
-//////////////////////////////////////////////////////
-//////////////////////////////////////////////////////
-// stylelint-disable no-descending-specificity
 
 // @media all {}
 
 html {
   -webkit-text-size-adjust: none;
-  min-height: 100%;
+  height: 100%;
 }
 
 body {
-  min-height: 100%;
+  height: 100%;
   color: $color_text;
-  background: $color_background;
+  background: $color_white;
   margin: 0;
   padding: 0;
   quotes: "\00ab" "\00bb";
@@ -28,10 +25,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   ::selection {
-    background: fade-out($color_second, $fade * 3);
+    background: fade-out($color_active, $fade * 3);
   }
 }
-
 
 // No outline on focus controls!!!
 button,
@@ -69,7 +65,7 @@ a {
 // Links
 a {
   text-decoration: none;
-  @include link-color($color_link, $color_link-hover);
+  @include link-style($color_link, $color_link-hover);
 }
 
 
@@ -80,8 +76,6 @@ button {
   border: none;
   text-transform: uppercase;
   border-radius: $border-radius_large;
-  padding: $btn_padding_horizontal_base $btn_padding_vertical_base;
-  @include btn-color($color_white, $color_primary);
   @include text($font-family_sans, $font-size_normal, $font-weight_sans_regular);
 }
 
@@ -106,11 +100,6 @@ ul {
   list-style-type: none;
   padding-left: 0;
   margin: 0;
-
-  // For classic style
-  &.list-style {
-    @extend %list-style;
-  }
 }
 
 
@@ -148,7 +137,7 @@ iframe {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: $color_primary;
+    background: $color_main;
 }
 
 /* Handle */

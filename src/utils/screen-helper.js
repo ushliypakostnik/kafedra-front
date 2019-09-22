@@ -5,36 +5,35 @@ const ScreenHelper = (() => {
 
   const XS = 360;
   const SM = 768;
-  const MD = 922;
-  const LG = 1200;
+  const MD = 1100;
+  const LG = 1600;
 
-  function isMin() {
-    return window.matchMedia(`(max-width: ${XS}px)`).matches;
-  }
-
-  function isXS() {
+  const isXS = () => {
     return window.matchMedia(`(max-width: ${SM - 1}px)`).matches;
   }
 
-  function isSM() {
+  const isSM = () => {
     return window.matchMedia(`(min-width: ${SM}px) and (max-width: ${MD - 1}px)`).matches;
   }
 
-  function isMD() {
+  const isMD = () => {
     return window.matchMedia(`(min-width: ${MD}px) and (max-width: ${LG - 1}px)`).matches;
   }
 
-  function isLG() {
+  const isDesktop = () => {
+    return window.matchMedia(`(min-width: ${MD}px)`).matches;
+  }
+
+  const isLG = () => {
     return window.matchMedia(`(min-width: ${LG}px)`).matches;
   }
 
   return {
-    SM,
-    isMin,
     isXS,
     isSM,
     isMD,
     isLG,
+    isDesktop,
   };
 })();
 

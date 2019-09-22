@@ -47,7 +47,7 @@ export default {
     vertical-align: top;
 
     svg path {
-      fill: $color_primary;
+      fill: $color_main;
     }
   }
 </style>

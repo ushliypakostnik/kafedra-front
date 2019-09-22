@@ -1,7 +1,5 @@
 // Utilities
 //////////////////////////////////////////////////////
-//////////////////////////////////////////////////////
-//////////////////////////////////////////////////////
 
 // Rubber Container
 .container-fluid {
@@ -14,14 +12,78 @@
   }
 }
 
-// Amimation class example
-.pulse {
-  $fadetransition-duration: $transition-duration * 2;
-  will-change: transform, opacity;
-  @include animation("pulse #{$transition-duration} infinite", "fadeOn #{$fadetransition-duration} forwards");
+// Visibility helpers
+
+.visible-lg-inline,
+.visible-sm,
+.visible-xs,
+.visible-min-inline {
+  display: none;
 }
 
-.pulse-slow {
-  will-change: transform;
-  animation: pulse ($transition-duration * 5) infinite;
+.visible-lg-inline {
+  @include lg {
+    display: inline;
+  }
+}
+
+.hidden-lg {
+  @include lg {
+    display: none;
+  }
+}
+
+.hidden-sm {
+  @include sm {
+    display: none;
+  }
+}
+
+.hidden-xs {
+  @include xs {
+    display: none;
+  }
+}
+
+.visible-sm {
+  @include sm {
+    display: block;
+  }
+}
+
+.visible-xs {
+  @include xs {
+    display: block;
+  }
+}
+
+.visible-min-inline {
+  @include min {
+    display: inline;
+  }
+}
+
+
+// Animations
+
+.bounce {
+  $duration: $transition_duration * 3;
+  animation: bounce #{$duration} infinite ease-in-out;
+}
+
+.pulse {
+  $duration: $transition_duration * 3;
+  animation: pulse #{$duration} infinite ease-in-out;
+}
+
+.riseUp {
+  $duration: $transition_duration * 2;
+  @include animation("riseUp #{$duration} forwards #{$transition_timing-function}",
+                     "fadeOn #{$duration} forwards #{$transition_timing-function}"); // stylelint-disable-line indentation
+}
+
+.riseDown {
+  $duration: $transition_duration * 2;
+  @include animation("riseDown #{$duration} forwards #{$transition_timing-function}",
+                     "fadeOut #{$duration} forwards #{$transition_timing-function}"); // stylelint-disable-line indentation
 }

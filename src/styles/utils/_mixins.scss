@@ -5,51 +5,70 @@
 
 // Media
 //////////////////////////////////////////////////////
-// Breackpoins in styles/utils/_variables.scss
+// Брекпоинты - смотреть в _variables.scss
 
 @mixin lg {
-  @media only screen and (min-width: $breackpoint_lg) {
+  @media (min-width: $breackpoint_lg) {
     @content;
   }
 }
 
 @mixin not-lg {
-  @media only screen and (max-width: $breackpoint_md_max) {
+  @media (max-width: $breackpoint_md_max) {
+    @content;
+  }
+}
+
+@mixin lg-and-md {
+  @media (min-width: $breackpoint_md) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: $breackpoint_md) and (max-width: $breackpoint_md_max) {
+    @content;
+  }
+}
+
+@mixin md-and-sm {
+  @media (min-width: $breackpoint_sm) and (max-width: $breackpoint_md_max) {
     @content;
   }
 }
 
 @mixin sm {
-  @media only screen and (min-width: $breackpoint_sm) and (max-width: $breackpoint_sm_max) {
+  @media (min-width: $breackpoint_sm) and (max-width: $breackpoint_sm_max) {
     @content;
   }
 }
 
 @mixin xs {
-  @media only screen and (max-width: $breackpoint_xs_max) {
+  @media (max-width: $breackpoint_xs_max) {
     @content;
   }
 }
 
 @mixin not-xs {
-  @media only screen and (min-width: $breackpoint_sm) {
+  @media (min-width: $breackpoint_sm) {
     @content;
   }
 }
 
 @mixin sm-and-xs {
-  @media only screen and (max-width: $breackpoint_sm_max) {
+  @media (max-width: $breackpoint_sm_max) {
     @content;
   }
 }
 
 @mixin min {
-  @media only screen and (max-width: $breackpoint-xs) {
+  @media (max-width: $breackpoint-xs) {
     @content;
   }
 }
 
-// Retina 2x
+
+// Retina
 @mixin retina {
   @media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
     only screen and (-moz-min-device-pixel-ratio: 1.5),
@@ -59,17 +78,78 @@
   }
 }
 
-
-// Elements
-//////////////////////////////////////////////////////
-
 // Size )
 @mixin size($width, $height) {
   width: $width;
   height: $height;
 }
 
-@mixin link-color($color, $color-hover) {
+
+// Elements
+//////////////////////////////////////////////////////
+
+// Примеси для покраски кнопок
+
+@mixin btn($color, $background) {
+  padding: $btn_padding_vertical_base $btn_padding_horizontal_base;
+  background-color: $background;
+  color: $color;
+  will-change: background;
+  @include transitions(background);
+
+  &:hover,
+  &:active {
+    background-color: darken($background, $fade );
+    color: $color;
+  }
+
+  @include sm-and-xs {
+    &,
+    &:hover,
+    &:focus {
+      background-color: $background;
+      color: $color;
+    }
+
+    &:active {
+      background-color: darken($background, $fade);
+      color: $color;
+    }
+  }
+}
+
+@mixin btn-transparent($color) {
+  padding: ($btn_padding_vertical_base - $border_width) $btn_padding_horizontal_base;
+  border: $border_width solid $color;
+  background-color: transparent;
+  color: $color;
+  border-color: $color;
+  will-change: all;
+  @include transitions(all);
+
+  &:hover,
+  &:active {
+    color: darken($color, $fade);
+    border-color: darken($color, $fade);
+  }
+
+  @include sm-and-xs {
+    &,
+    &:hover,
+    &:focus {
+      color: $color;
+      border-color: $color;
+    }
+
+    &:active {
+      color: darken($color, $fade);
+      border-color: darken($color, $fade);
+    }
+  }
+}
+
+// Примесь для покраски ссылок
+@mixin link-style($color, $color-hover) {
   will-change: color;
   @include transitions(color);
 
@@ -82,18 +162,17 @@
   &:active {
     color: $color-hover;
   }
-}
 
-@mixin btn-color($color, $background) {
-  background-color: $background;
-  color: $color;
-  will-change: background;
-  @include transitions(background);
+  @include sm-and-xs {
+    &,
+    &:hover,
+    &:focus {
+      color: $color;
+    }
 
-  &:hover,
-  &:active {
-    background-color: darken($background, $fade-percent);
-    color: $color;
+    &:active {
+      color: $color-hover;
+    }
   }
 }
 
