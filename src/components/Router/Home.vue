@@ -150,9 +150,6 @@ export default {
     }),
   },
 
-  beforeCreate() {
-  },
-
   mounted() {
     const scene = document.getElementById('scene-1');
     const parallaxInstance = new Parallax(scene); // eslint-disable-line no-unused-vars
