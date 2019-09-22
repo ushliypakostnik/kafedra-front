@@ -34,14 +34,14 @@ export const addEventListener = (el, event, fn) => {
       delete el[`on${event}`];
     }
   };
-}
+};
 
 export const addClassName = (el, className) => {
   // eslint-disable-next-line no-param-reassign
   el.className = `${el.className} ${className}`;
-}
+};
 
 export const removeClassName = (el, className) => {
   // eslint-disable-next-line no-param-reassign
   el.className = el.className.replace(new RegExp(`(?:^|\\s)${className}(?:\\s|$)`), ' ');
-}
+};

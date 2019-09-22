@@ -1,12 +1,10 @@
-// import axios from 'axios';
-// import Cookies from 'js-cookie';
+import { LOCALSTORAGE } from '@/utils/constants';
 
-// import {} from '@/utils/constants';
+export default ({
 
-/* eslint-disable dot-notation */
+  // User
 
-// axios.defaults.withCredentials = true;
-
-// export default ({});
-
-/* eslint-enable dot-notation */
+  setSongs: (songs) => {
+    localStorage.setItem(LOCALSTORAGE.songs, JSON.stringify(songs));
+  },
+});

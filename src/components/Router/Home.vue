@@ -7,7 +7,7 @@
       <div data-depth="0.1" class="scene-1__1">
       </div>
       <div data-depth="0.4" originX="" class="scene-1__2">
-        <h2><strong>Kafedra</strong> of experimental psychonautics<span class="visible-lg-inline"> </span><br class="hidden-lg" />and inner space research</h2>
+        <h2><strong>{{ getStatus }} Kafedra</strong> of experimental psychonautics<span class="visible-lg-inline"> </span><br class="hidden-lg" />and inner space research</h2>
       </div>
       <div data-depth="0" originX="" class="scene-1__3">
         <div class="boom"><div class="pulse"><span>Radio! New!</span></div></div>
@@ -18,24 +18,26 @@
       <h2><strong>Kafedra</strong> of experimental psychonautics<br />and inner space research</h2>
     </div>
     <div id="scene-2" class="scene-2">
-      <div class="player">
-        <div class="player__now">
-          <div class="player__label">Now</div>
-          <div class="player__track-title">No Artist - No Title</div>
-          <div class="player__duration">0:00</div>
+      <div class="player-wrapper">
+        <div class="player">
+          <div class="player__now">
+            <div class="player__label">Now</div>
+            <div class="player__track-title">No Artist - No Title</div>
+            <div class="player__duration">0:00</div>
+          </div>
+          <div class="player__next">
+            <div class="player__label">Next</div>
+            <div class="player__track-title">No Artist - No Title</div>
+            <div class="player__duration">0:00</div>
+          </div>
+          <div class="player__btns">
+            <a href="#" class="btn btn--play"><span class="btn__text">Play<i class="fas fa-play"></i></span></a
+            ><a href="#" class="btn btn--pause"><span class="btn__text">Pause<i class="fas fa-pause"></i></span></a
+            ><a href="#" class="btn btn--next"><span class="btn__text">Next<i class="fas fa-step-forward"></i></span></a>
+          </div>
         </div>
-        <div class="player__next">
-          <div class="player__label">Next</div>
-          <div class="player__track-title">No Artist - No Title</div>
-          <div class="player__duration">0:00</div>
-        </div>
-        <div class="player__btns">
-          <a href="#" class="btn btn--play"><span class="btn__text">Play<i class="fas fa-play"></i></span></a
-          ><a href="#" class="btn btn--pause"><span class="btn__text">Pause<i class="fas fa-pause"></i></span></a
-          ><a href="#" class="btn btn--next"><span class="btn__text">Next<i class="fas fa-step-forward"></i></span></a>
-        </div>
+        <div id="radio"></div>
       </div>
-      <div id="radio"></div>
     </div>
     <footer class="footer home__footer" role="contentinfo">
       <address>
@@ -60,9 +62,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Parallax from 'parallax-js';
 
-// mport path from 'path'; // for logger
+import { LOCALSTORAGE } from '@/utils/constants';
+
+import Radio from '@/utils/radio';
+
+// import path from 'path'; // for logger
 // import Logger from '@/utils/logger';
 import ScreenHelper from '@/utils/_screen-helper';
 
@@ -105,10 +112,10 @@ const onscroll = () => {
 
 const redraw = () => {
   // logger.info('redraw');
+  const radio = document.getElementById('radio');
+  const height = getHeight();
+  let h;
   if (ScreenHelper.isDesktop()) {
-    const radio = document.getElementById('radio');
-    const height = getHeight();
-    let h;
     if (height > 700) {
       h = (height - 60) * 0.6;
     } else {
@@ -121,14 +128,29 @@ const redraw = () => {
   checkScroll(onscroll());
 };
 
+const controls = {
+  playerClassName: 'player',
+  btnPlay: '.btn--play',
+  btnPause: '.btn--pause',
+  btnNext: '.btn--next',
+};
+
 export default {
   name: 'Home',
 
-  components: {
+  data: () => ({
+    songs: JSON.parse(localStorage.getItem(LOCALSTORAGE.songs)) || null,
+    radio: false,
+  }),
+
+  computed: {
+    ...mapGetters({
+      getStatus: 'getStatus',
+      getSongs: 'getSongs',
+    }),
   },
 
   beforeCreate() {
-    // this.$store.dispatch('utils/TEST_ACTION');
   },
 
   mounted() {
@@ -139,6 +161,26 @@ export default {
     window.addEventListener('scroll', () => onscroll());
 
     redraw();
+
+    if (this.songs === null || typeof (this.songs) === 'undefined') {
+      this.$store.dispatch('GET_SONGS_REQUEST');
+    } else {
+      const radio = new Radio({ // eslint-disable-line no-unused-vars
+        songs: this.songs,
+        ...controls,
+      });
+      this.radio = true;
+    }
+  },
+
+  beforeUpdate() {
+    if (this.getStatus === 'success' && !this.radio) {
+      const radio = new Radio({ // eslint-disable-line no-unused-vars
+        songs: this.getSongs,
+        ...controls,
+      });
+      this.radio = true;
+    }
   },
 };
 </script>

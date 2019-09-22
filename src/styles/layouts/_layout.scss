@@ -1,6 +1,8 @@
 // Custom styles
 //////////////////////////////////////////////////////
 
+// stylelint-disable max-nesting-depth
+
 $footer_height: 60px;
 $footer_height_gadget: 45px;
 
@@ -169,6 +171,7 @@ $breackpoint_height_large: 850px;
         background-size: contain;
         @include size(300px, 200px);
 
+        // stylelint-disable-next-line selector-max-compound-selectors
         > span {
           position: absolute;
           top: 70px;
@@ -360,11 +363,11 @@ $breackpoint_height_large: 850px;
     }
 
     @include md-and-sm {
-      @include text($font-family_sans, round($font-size_normal * 0.85), $font-weight_sans_bold);
+      @include text($font-family_sans, $font-size_normal, $font-weight_sans_bold);
     }
 
     @include xs {
-      @include text($font-family_sans, round($font-size_normal * 0.7), $font-weight_sans_bold);
+      @include text($font-family_sans, round($font-size_normal * 0.75), $font-weight_sans_bold);
     }
   }
 
@@ -381,18 +384,16 @@ $breackpoint_height_large: 850px;
   text-transform: uppercase;
   @include text($font-family_serif, $font-size_normal, $font-weight_serif_bold);
 
-  & + .btn {
-    @include not-xs {
-      margin-left: $gutter * 2;
-    }
-    @include xs {
-      margin-top: $gutter;
-    }
+  @include not-xs {
+    margin: 0 ($gutter * 2);
   }
-
   @include xs {
     display: block;
     margin: 0 auto;
+
+    &:last-child {
+      margin-top: $gutter;
+    }
   }
 
   &--play {
@@ -416,3 +417,5 @@ $breackpoint_height_large: 850px;
     @include btn($color_main, $color_active);
   }
 }
+
+// stylelint-enable max-nesting-depth

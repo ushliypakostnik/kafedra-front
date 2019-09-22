@@ -21,15 +21,6 @@ class Radio {
 
   _isPlayerActive = false;
 
-  static _getSongsList(songsUrl) {
-    // eslint-disable-next-line no-undef
-    return fetch(songsUrl)
-      .then(response => response.json())
-      .catch((err) => {
-        console.error('something gone wrong with request', err);
-      });
-  }
-
   static _getFormattedTime(duration) {
     const sRaw = duration % 60;
     const s = Math.floor(sRaw);
@@ -88,16 +79,16 @@ class Radio {
 
     this._updateTrackInfo({
       type: 'now',
-      title: `${track.meta.artist[0]} - ${track.meta.title}`,
-      duration: Radio._getFormattedTime(track.meta.duration),
+      title: `${track.title}`,
+      duration: Radio._getFormattedTime(track.duration),
     });
 
     if (!nextTrack) { return; }
 
     this._updateTrackInfo({
       type: 'next',
-      title: `${nextTrack.meta.artist[0]} - ${nextTrack.meta.title}`,
-      duration: Radio._getFormattedTime(nextTrack.meta.duration),
+      title: `${nextTrack.title}`,
+      duration: Radio._getFormattedTime(nextTrack.duration),
     });
   }
 
@@ -144,7 +135,7 @@ class Radio {
   }
 
   _initRadio({
-    playerClassName, btnPlay, btnPause, btnNext, songsUrl,
+    playerClassName, btnPlay, btnPause, btnNext, songs,
   }) {
     this._bindControls({
       playerClassName,
@@ -153,13 +144,11 @@ class Radio {
       btnNext,
     });
 
-    Radio._getSongsList(songsUrl).then((result) => {
-      if (result && result.songs && result.songs.length > 0) {
-        this._isPlayerActive = true;
-        this._songs = randomizeArray(result.songs);
-        this.next(); // initial player data setup
-      }
-    });
+    if (songs.length > 0) {
+      this._isPlayerActive = true;
+      this._songs = randomizeArray(songs);
+      this.next(); // initial player data setup
+    }
   }
 
   _setNextTrack() {

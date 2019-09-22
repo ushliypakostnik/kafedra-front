@@ -98,7 +98,8 @@
   @include transitions(background);
 
   &:hover,
-  &:active {
+  &:active,
+  &:focus {
     background-color: darken($background, $fade );
     color: $color;
   }
@@ -128,7 +129,8 @@
   @include transitions(all);
 
   &:hover,
-  &:active {
+  &:active,
+  &:focus {
     color: darken($color, $fade);
     border-color: darken($color, $fade);
   }
