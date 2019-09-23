@@ -65,7 +65,7 @@
 import { mapGetters } from 'vuex';
 import Parallax from 'parallax-js';
 
-import { LOCALSTORAGE } from '@/utils/constants';
+import { SESSION_STORAGE } from '@/utils/constants';
 
 import Radio from '@/utils/radio';
 
@@ -139,7 +139,7 @@ export default {
   name: 'Home',
 
   data: () => ({
-    songs: JSON.parse(localStorage.getItem(LOCALSTORAGE.songs)) || null,
+    songs: JSON.parse(sessionStorage.getItem(SESSION_STORAGE.songs)) || null,
     radio: false,
   }),
 

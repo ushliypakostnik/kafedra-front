@@ -1,10 +1,10 @@
-import { LOCALSTORAGE } from '@/utils/constants';
+import { SESSION_STORAGE } from '@/utils/constants';
 
 export default ({
 
   // User
 
   setSongs: (songs) => {
-    localStorage.setItem(LOCALSTORAGE.songs, JSON.stringify(songs));
+    sessionStorage.setItem(SESSION_STORAGE.songs, JSON.stringify(songs));
   },
 });
