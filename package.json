@@ -1,7 +1,7 @@
 {
-  "name": "vue-start",
+  "name": "kafedra-front",
   "version": "1.0.0",
-  "description": "Vue cli based frontend boilerplate",
+  "description": "Frontend for Rock-band Online-Radio",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
