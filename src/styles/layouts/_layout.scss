@@ -318,7 +318,6 @@ $breackpoint_height_large: 850px;
     > div {
       background: $color_active;
       @include size(0, $gutter);
-      @include transitions(width);
     }
 
     &--playing {
