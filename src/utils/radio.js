@@ -39,11 +39,47 @@ class Radio {
   // eslint-disable-next-line class-methods-use-this
   play(isToPlay) {
     if (this._sound) {
+      // console.log(this._sound.seek(this._sound.duration()));
       this._isNowPlaying = isToPlay;
       if (isToPlay) {
         this._sound.play();
+        this.progress();
       } else {
         this._sound.pause();
+      }
+      this.showProgress();
+    }
+  }
+
+  showProgress() {
+    if (this._sound) {
+      const progress = document.querySelector('.player__progress');
+
+      if (this._isNowPlaying) {
+        progress.classList.add('player__progress--playing');
+      } else {
+        progress.classList.remove('player__progress--playing');
+      }
+    }
+  }
+
+  progress() {
+    if (this._sound) {
+      const progress = document.querySelector('.player__progress div');
+
+      const { duration } = this._getTrackInfo();
+      let played;
+
+      if (!this._sound.seek() || this._sound.seek() < 1) {
+        played = 0;
+      } else {
+        played = this._sound.seek();
+      }
+
+      progress.style.width = `${((played / duration) * 100)}%`;
+
+      if (this._isNowPlaying) {
+        requestAnimationFrame(this.progress.bind(this));
       }
     }
   }
@@ -54,6 +90,9 @@ class Radio {
     this._updatePlayerState();
 
     const track = this._getTrackInfo();
+    const progress = document.querySelector('.player__progress div');
+
+    progress.style.width = '0%';
 
     if (this._sound) {
       this._sound.unload();

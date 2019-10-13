@@ -7,7 +7,7 @@
       <div data-depth="0.1" class="scene-1__1">
       </div>
       <div data-depth="0.4" originX="" class="scene-1__2">
-        <h2><strong>{{ getStatus }} Kafedra</strong> of experimental psychonautics<span class="visible-lg-inline"> </span><br class="hidden-lg" />and inner space research</h2>
+        <h2><strong>Kafedra</strong> of experimental psychonautics<span class="visible-lg-inline"> </span><br class="hidden-lg" />and inner space research</h2>
       </div>
       <div data-depth="0" originX="" class="scene-1__3">
         <div class="boom"><div class="pulse"><span>Radio! New!</span></div></div>
@@ -18,7 +18,8 @@
       <h2><strong>Kafedra</strong> of experimental psychonautics<br />and inner space research</h2>
     </div>
     <div id="scene-2" class="scene-2">
-      <div class="player-wrapper">
+      <div class="player__wrapper">
+        <div class="player__progress"><div></div></div>
         <div class="player">
           <div class="player__now">
             <div class="player__label">Now</div>

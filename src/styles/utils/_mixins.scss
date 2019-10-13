@@ -43,6 +43,12 @@
   }
 }
 
+@mixin sm-and-xs {
+  @media (max-width: $breackpoint_sm_max) {
+    @content;
+  }
+}
+
 @mixin xs {
   @media (max-width: $breackpoint_xs_max) {
     @content;
@@ -51,12 +57,6 @@
 
 @mixin not-xs {
   @media (min-width: $breackpoint_sm) {
-    @content;
-  }
-}
-
-@mixin sm-and-xs {
-  @media (max-width: $breackpoint_sm_max) {
     @content;
   }
 }

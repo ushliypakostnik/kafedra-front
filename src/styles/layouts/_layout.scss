@@ -300,6 +300,32 @@ $breackpoint_height_large: 850px;
   text-align: center;
   padding-top: $gutter * 4;
 
+  &__wrapper {
+    height: 100%;
+    position: relative;
+  }
+
+  &__progress {
+    opacity: 0;
+    background: $color_main_dark;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    @include size(100%, $gutter);
+    @include transitions(opacity);
+
+    > div {
+      background: $color_active;
+      @include size(0, $gutter);
+      @include transitions(width);
+    }
+
+    &--playing {
+      opacity: 1;
+    }
+  }
+
   @media (min-height: $breackpoint_height_large) {
     padding-top: $gutter * 5;
   }
@@ -343,7 +369,10 @@ $breackpoint_height_large: 850px;
     grid-row: 2;
 
     @include sm-and-xs {
+      position: relative;
+      margin: 0 auto;
       padding-top: $gutter * 2;
+      @include size(200px, 168px);
     }
   }
 
@@ -367,7 +396,7 @@ $breackpoint_height_large: 850px;
     }
 
     @include xs {
-      @include text($font-family_sans, round($font-size_normal * 0.75), $font-weight_sans_bold);
+      @include text($font-family_sans, round($font-size_normal * 0.66), $font-weight_sans_bold);
     }
   }
 
@@ -383,18 +412,6 @@ $breackpoint_height_large: 850px;
   vertical-align: top;
   text-transform: uppercase;
   @include text($font-family_serif, $font-size_normal, $font-weight_serif_bold);
-
-  @include not-xs {
-    margin: 0 ($gutter * 2);
-  }
-  @include xs {
-    display: block;
-    margin: 0 auto;
-
-    &:last-child {
-      margin-top: $gutter;
-    }
-  }
 
   &--play {
     @include btn($color_main, $color_white);
@@ -415,6 +432,29 @@ $breackpoint_height_large: 850px;
 
   &--next {
     @include btn($color_main, $color_active);
+  }
+
+  @include lg-and-md {
+    margin: 0 ($gutter * 2);
+  }
+
+  @include sm-and-xs {
+    &--play,
+    &--pause,
+    &--next {
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+
+    &--play,
+    &--pause {
+      top: $gutter * 2;
+    }
+
+    &--next {
+      bottom: 0;
+    }
   }
 }
 
