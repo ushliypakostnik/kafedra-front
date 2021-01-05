@@ -17,7 +17,7 @@
     "url": "https://github.com/ushliypakostnik/kafedra-front"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "core-js": "^2.6.5",
     "howler": "^2.1.2",
     "parallax-js": "^3.1.0",
